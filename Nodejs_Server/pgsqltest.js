@@ -1,32 +1,32 @@
 var pg = require('pg');
 
 //数据库配置
-var config = {
-	user:'postgres',
-	database:'nodejspg',
-	password:'root',
-	port:'5432',
-
-	//扩展属性
-	max:20,//连接池最大连接数
-	idleTimeoutMillis:3000,//连接最大空闲时间
-}
-
+// var config = {
+// 	user:'postgres',
+// 	database:'nodejspg',
+// 	password:'root',
+//   host:'localhost',
+// 	port:'5432',
+// }
+var conString = "tcp://postgres:root@localhost/nodejspg";
 //创建连接池
-var pool =  new pg.Pool(config);
+var client =  new pg.Client(conString);
+var tem = 33;
+selectSQLString = 'insert into pet(tem) values ('+tem+') ';
 
-// 查询
-pool.connect(function(err, client, done) {  
-  if(err) {
-    return console.error('数据库连接出错', err);
+//客户端连接
+client.connect(function(error, results){
+  if (error) {
+    console.log('clientConnectionReady Error:'+error.message);
+    client.end();
+    return;
   }
-  // 简单输出个 Hello World
-  client.query("INSERT INTO user(username, password) VALUES($1::varchar, $2::varchar)", ["xiaoming","20njunjnun"], function(err, result) {
-    done();// 释放连接（将其返回给连接池）
-    if(err) {
-      return console.error('查询出错', err);
-    }
-    console.log(result.rows[0].out); //output: Hello World
-  });
+  console.log('connection success...\n');
+  client.query(selectSQLString,function(error,results){
+    // console.log(results.rows[0].username);
+    console.log(error);
+  })
 });
+// 查询
+
 
