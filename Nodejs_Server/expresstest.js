@@ -13,6 +13,7 @@ var conn = mysql.createConnection({
 //连接数据库
 conn.connect();
 
+
 //设置所有路由无限制访问，不需要跨域
 app.all('*',function(req,res,next){
  	res.header("Access-Control-Allow-Origin","*");
@@ -22,11 +23,12 @@ app.all('*',function(req,res,next){
  	res.header("Content-Type","application/json;charset=utf-8");
  	next();
 })
+
+ 
 //温度
 app.get('/tem',function(req,res){
 	var tem = [];
 	conn.query('SELECT * FROM pet',function(err,rows,fields){
-		var i  = rows.length;
 		var i = rows.length;
 		var j =i-5;
 		var c= 0;
@@ -35,6 +37,7 @@ app.get('/tem',function(req,res){
 			c++;
 			j++;
 		}
+
 		res.send(JSON.stringify(tem));
 	})
 })
@@ -51,6 +54,54 @@ app.get('/hum',function(req,res) {
 			j++;
 		}
 		res.send(JSON.stringify(hum));
+	})
+	 
+});
+//宠物室内室外
+app.get('/indoor',function(req,res) {
+	var indoor = [];
+	conn.query('SELECT * FROM pet',function(err,rows,fields){
+		var i = rows.length;
+		var j =i-5;
+		var c= 0;
+		while(j<i){
+			indoor[c] = rows[j].indoor;
+			c++;
+			j++;
+		}
+		res.send(JSON.stringify(indoor));
+	})
+	 
+});
+//宠物门
+app.get('/door',function(req,res) {
+	var door = [];
+	conn.query('SELECT * FROM pet',function(err,rows,fields){
+		var i = rows.length;
+		var j =i-5;
+		var c= 0;
+		while(j<i){
+			door[c] = rows[j].door;
+			c++;
+			j++;
+		}
+		res.send(JSON.stringify(door));
+	})
+	 
+});
+//宠物屋风扇
+app.get('/feng',function(req,res) {
+	var feng = [];
+	conn.query('SELECT * FROM pet',function(err,rows,fields){
+		var i = rows.length;
+		var j =i-5;
+		var c= 0;
+		while(j<i){
+			feng[c] = rows[j].feng;
+			c++;
+			j++;
+		}
+		res.send(JSON.stringify(feng));
 	})
 	 
 });
@@ -76,9 +127,32 @@ app.get('/time',function(req,res){
 app.get('/watch',function(req,res){
 	var tem = [];
 	conn.query('SELECT * FROM pet',function(err,rows,fields){
-		var tem = "{ \"temhum\" :" + "\"" + rows[rows.length-1].tem + "  |  " 
-		+ rows[rows.length-1].hum +  "\""  + "}";
+		var indoor;
+		if (rows[rows.length-1].indoor == 1) {
+			indoor = "在";
+		}else{
+			indoor = "不";
+		}
+
+		var tem = "{ \"temhum\" :" + "\"" + rows[rows.length-1].tem +" "+indoor 
+		+" "+ rows[rows.length-1].hum +  "\""  + "}";
 		res.send(tem);
+	})
+})
+
+//new 手表推送
+app.get('/newwatch',function(req,res){
+	var data = [];
+	conn.query('SELECT * FROM pet',function(err,rows,fields){
+		var indoor = "";
+		if ( rows[rows.length-1].indoor== 1) {
+			indoor = "在"
+		}else{
+			indoor = "不在"
+		}
+
+		data = "{ \"tem\":"+  rows[rows.length-1].tem  +",\"hum\":"+  rows[rows.length-1].hum  +",\"indoor\":"+ "\""+   indoor +"\" }"
+		res.send(data);
 	})
 })
 //按钮api
@@ -106,5 +180,7 @@ app.get('/buttonclick0',function(req,res){
 })
 //端口：3000
 var server = app.listen(3000,function(){
+ 
+
 	console.log("127.0.0.1:3000");
 })
