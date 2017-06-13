@@ -24,7 +24,32 @@ app.all('*',function(req,res,next){
  	next();
 })
 
- 
+//定时接口
+app.post('/times',function(req,res){
+	
+	var data = "";  
+	req.on("data",function(chunk){  
+	    data += chunk;  
+	})  
+	req.on("end",function(){  
+	    data = JSON.parse(data);  
+	    var autotime = data.times; 
+	    var post = {};
+	    if(autotime == "od1"){
+	    	post.type = 1;
+	    } 
+	    else if(autotime == "od2"){
+	    	post.type = 2;
+	    }
+	    else if(autotime == "od3"){
+	    	post.type = 3;
+	    }
+	    conn.query('INSERT INTO autofood SET ?', post ,function(error,result,fields){
+			if(error) throw error;
+		});
+	})
+	res.send("ok");
+})
 //温度
 app.get('/tem',function(req,res){
 	var tem = [];
