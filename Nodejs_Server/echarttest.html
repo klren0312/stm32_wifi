@@ -26,11 +26,62 @@
 		h1{
 			position: absolute;
 			color: white;
-			top: 66%;
-			left: 35%;
+			top: 50%;
+			left: 45%;
 			z-index: 100;
 		}
 
+		#image1,#image0{
+			width: 308px;
+			height: 156px;
+		}
+		
+		#indoor{
+			position: absolute;
+			top: 65%;
+			left: 39%;
+			z-index: 100;
+		}
+		
+		#fengshan{
+			position: absolute;
+			top: 52%;
+			z-index: 100;
+		}
+		.feng{
+			width: 70px;
+			height: 60px;
+		}
+
+		#timeset{
+			position: absolute;
+			top: 70%;
+			left: 8%;
+			z-index: 1000;
+		}
+		#time{
+			height: 35px;
+			width: 110px;
+			font-size: 20px;
+		}
+		#timefont{
+			position: absolute;
+			top: 68%;
+			font-size: 20px;
+			color: white;
+			z-index: 1000;
+		}
+		#databtn{
+			position: absolute;
+			top: 80%;
+			left: 1%;
+			width: 200px;
+			height: 25px;
+			color: white;
+			background-color: #D4A983;
+			border-radius: 5px 5px;
+			z-index: 1000;
+		}
 	</style>
 	<script src="echarts.js"></script>
 
@@ -38,17 +89,35 @@
 <body>
 	
 	<div id="main"></div>
-	<h1>治电科技温湿度实时显示测试</h1>
+	<h1>宠物屋实时</h1>
+	<div id="indoor">
+		<img src="img/1.png" alt="" id="image1">
+		<img src="img/0.png" alt="" id="image0">
+	</div>
+	<div id="fengshan">
+		<img class="feng" src="img/f1.gif" alt="风扇开" id="feng1">
+		<img class="feng" src="img/f0.jpg" alt="风扇关" id="feng0">
+	</div>
+	<form id="myform" action="" method="get">
+		<p id="timefont">喂食次数：</p>
+		<div id="timeset">
+			<select name="time" id="time">
+				<option value="od1">一天一次</option>
+				<option value="od2">一天两次</option>
+				<option value="od3">一天三次</option>
+			</select>
+		</div>	
+		<br>
+		<button type="button" id="databtn" onclick="datapush()">提交</button>
+		
+	</form>
+	
 	<div id="tem"></div>
 	<div id="hum"></div>
+	
 
 	<script>
 
-		//页面刷新函数
- 		// function freshWeb(){
- 		// 	window.location.reload();
- 		// }
- 	
 
 
  		//fetch异步请求函数
@@ -63,10 +132,69 @@
  		function json(response){
  		    return response.json();
  		}
+ 		//页面刷新函数
+ 		// function freshWeb(){
+ 		// 	window.location.reload();
+ 		// }
+ 		var myform = document.getElementById('myform');
+
+ 		function datapush(){
+ 			var timedata = document.getElementById('time').value;
+ 			var test = "{\"times\": \""+ timedata + "\"}";
+ 			console.log(test);
+ 			fetch("http://localhost:3000/times",{
+ 				method:'post',
+ 				body: test
+ 			})
+ 			.then(status)
+ 			.then(json)
+ 			.then(function(data){
+ 				// myform.submit();
+ 				// console.log('request successed with JSON',data);
+ 			})
+ 			
+ 		}
  		//请求数据函数
  		function getData(){
+ 			//请求风扇是否打开
+ 			fetch("http://localhost:3000/feng")
+ 				.then(status)
+ 				.then(json)
+ 				.then(function(data){
+ 					var div = document.getElementById('fengshan');
+ 					var feng1 = document.getElementById('feng1');
+ 					var feng0 = document.getElementById('feng0');
+ 					if (data[data.length-1] == 1) {
+ 						feng1.style.display = "block";
+ 						feng0.style.display = "none";
+ 					}else{
+ 						feng1.style.display = "none";
+ 						feng0.style.display = "block";
+ 					}
+ 				})
+ 			 //请求宠物是否在屋内
+ 			fetch("http://localhost:3000/indoor")
+ 				.then(status)
+ 				.then(json)
+ 				.then(function(data){
+
+ 					var div = document.getElementById('indoor'); 
+ 					var image1 = document.getElementById('image1');
+ 					var image0 = document.getElementById('image0');
+
+ 			    	if(data[data.length-1] == 1){
+ 			    		 image0.style.display = "none";
+ 			    		 image1.style.display = "block";  
+ 			    	}else{
+ 			    		 image1.style.display = "none";
+ 			    		 image0.style.display = "block";  
+ 			    	}
+ 				})
+ 				.catch(function(err){
+ 			    	console.log("Fetch错误:"+err);
+ 				});
  			//请求时间
- 			fetch("http://127.0.0.1:3000/time")
+ 			fetch("http://localhost:3000/time")
  				.then(status)
  				.then(json)
  				.then(function(data){
@@ -81,12 +209,11 @@
  			    	console.log("Fetch错误:"+err);
  				});
  			//请求温度数据
- 			fetch("http://127.0.0.1:3000/tem")
+ 			fetch("http://localhost:3000/tem")
  				.then(status)
  				.then(json)
- 				.then(function(data){
- 			    	// console.log("请求成功，JSON解析后的响应数据为:",data);
- 			    	
+ 				.then(function(data){		    	
+ 			    	//折线图温度
  			    	myChart.setOption({
  			    	       
  			    	       series: [{
@@ -95,7 +222,7 @@
  			    	           data: data
  			    	       }]
  			    	});
-
+ 			    	//仪表盘温度
  			    	temChart.setOption({
  			    	       
  			    	       series: [{
@@ -107,13 +234,12 @@
  				.catch(function(err){
  			    	console.log("Fetch错误:"+err);
  				});
-
  			//请求湿度数据
- 			fetch("http://127.0.0.1:3000/hum")
+ 			fetch("http://localhost:3000/hum")
  				.then(status)
  				.then(json)
  				.then(function(data){
- 			    	// console.log("请求成功，JSON解析后的响应数据为:",data);
+ 			    	// 折线图湿度
  			    	myChart.setOption({
  			    	       series: [{
  			    	           // 根据名字对应到相应的系列
@@ -121,6 +247,7 @@
  			    	           data: data
  			    	       }]
  			    	});
+ 			    	//湿度仪表盘
  			    	humChart.setOption({
  			    	       series: [{
  			    	           // 根据名字对应到相应的系列
@@ -131,39 +258,90 @@
  				.catch(function(err){
  			    	console.log("Fetch错误:"+err);
  				});
-
  		}
  		//更新ECharts数据
-		setInterval('getData()',10);
+		// setInterval('getData()',10);
 
 		//初始化echarts
 		var myChart = echarts.init(document.getElementById('main'));
 		var temChart = echarts.init(document.getElementById('tem'));
 		var humChart = echarts.init(document.getElementById('hum'));
 
-		//配置温湿度折线图
-		var option ={
-			title:{
-				text:'温湿度'
-			},
-			tooltip:{},//提示框
-			legend:{//图例组件
-				data:['温度','湿度']
-			},
-			xAxis:{
-				data:["1","2","3","4","最新"]
-			},
-			yAxis:{},
-			series: [{
-        		name: '温度',
-       			type: 'line',
-        		data: []
-    		},{
-    			name:"湿度",
-    			type:'line',
-    			data:[]
-    		}]
-		};
+			//配置温湿度折线图
+			var colors = ['#5793f3', '#d14a61', '#675bba'];
+			var option ={
+				color:colors,
+				tooltip: {
+			        trigger: 'none',
+			        axisPointer: {
+			            type: 'cross'
+			        }
+			    },//提示框
+				grid: {
+						x: 35,
+						x2: 10,
+						y: 50,
+						y2: 25
+				},
+				legend:{//图例组件
+					data:['温度','湿度']
+				},
+				
+				xAxis:[{
+					type: 'category',
+		            axisTick: {
+		                alignWithLabel: true
+		            },
+		            axisLine: {
+		                onZero: false,
+		                lineStyle: {
+		                    color: colors[0]
+		                }
+		            },
+		            axisPointer: {
+		                label: {
+		                    formatter: function (params) {
+		                        return '温度  ' + params.value + '：' + params.seriesData[0].data;
+		                    }
+		                }
+		            },
+					data:["wait1","wait2","wait3","wait4","wait5"]
+				},
+				{
+		            type: 'category',
+		            axisTick: {
+		                alignWithLabel: true
+		            },
+		            axisLine: {
+		                onZero: false,
+		                lineStyle: {
+		                    color: colors[1]
+		                }
+		            },
+		            axisPointer: {
+		                label: {
+		                    formatter: function (params) {
+		                        return '湿度  ' + params.value + '：' + params.seriesData[0].data;
+		                    }
+		                }
+		            },
+		            data:["1","2","3","4","最新"]
+       			}
+				],
+				yAxis:{
+					min: 0,
+        		max: 80,
+				},
+				series: [{
+	        		name: '温度',
+	       			type: 'line',
+	        		data: []
+	    		},{
+	    			name:"湿度",
+	    			type:'line',
+	    			data:[]
+	    		}]
+			};
 
 		//配置温度实时仪表盘
 		var temOption ={
