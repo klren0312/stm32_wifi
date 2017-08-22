@@ -39,5 +39,8 @@
  - [搭建简易的物联网服务端和客户端-网络控制（二十）](http://www.jianshu.com/p/f21b6665d807)
  - [搭建简易的物联网服务端和客户端-Maibu控制（二十一）](http://www.jianshu.com/p/9d16fac7cd15)
  - [搭建简易的物联网服务端和客户端-第三次增补（二十二）](http://www.jianshu.com/p/206cf7d63555)
+ - [搭建简易的物联网服务端和客户端-移动家庭能力平台【1】（二十三）](http://www.jianshu.com/p/2ad5e9df4db7)
+ - [搭建简易的物联网服务端和客户端-移动家庭能力平台【2】（二十四）](http://www.jianshu.com/p/e1dd1a668d5b)
+ - [搭建简易的物联网服务端和客户端-redis+websocket（二十五）](http://www.jianshu.com/p/10ac501b36fd)
 
 
