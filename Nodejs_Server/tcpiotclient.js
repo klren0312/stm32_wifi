@@ -1,5 +1,5 @@
 const net = require('net')
-const client = net.connect({port:4001},() => {
+const client = net.connect({port:4001,host:"127.0.0.1"},() => {
 	console.log("connected to server!");
 	client.write("{\"tem\":\"20\",\"hum\":\"80\"}");
 });

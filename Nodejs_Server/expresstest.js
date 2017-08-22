@@ -1,7 +1,11 @@
 var express = require('express');
 var mysql = require('mysql');
+var bodyParser     =require("body-parser"); 
+
 app = express();
 app.use('/static',express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false })); 
+// app.use(bodyParser.json());
 //数据库配置
 var conn = mysql.createConnection({
 	host:'localhost',
@@ -24,6 +28,12 @@ app.all('*',function(req,res,next){
  	next();
 })
 
+// test
+app.post('/test',function(req,res){
+	console.log(req.body);
+	res.send('{"status":"ok"}');
+})
+
 //定时接口
 app.post('/times',function(req,res){
 	
@@ -32,7 +42,7 @@ app.post('/times',function(req,res){
 	    data += chunk;  
 	})  
 	req.on("end",function(){  
-	    data = JSON.parse(data);  
+	    data = JSON.parse(data); 
 	    var autotime = data.times; 
 	    var post = {};
 	    if(autotime == "od1"){
@@ -48,6 +58,7 @@ app.post('/times',function(req,res){
 			if(error) throw error;
 		});
 	})
+ 
 	res.send("ok");
 })
 //温度
