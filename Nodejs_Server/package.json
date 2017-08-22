@@ -4,11 +4,14 @@
   "description": "",
   "main": "mysqltest.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "echarts": "^3.4.0",
     "emailjs": "^1.0.8",
     "express": "^4.15.2",
     "mysql": "^2.13.0",
-    "pg": "^6.2.2"
+    "pg": "^6.2.2",
+    "redis": "^2.8.0",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {
