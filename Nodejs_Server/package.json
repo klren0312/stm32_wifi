@@ -9,6 +9,7 @@
     "emailjs": "^1.0.8",
     "express": "^4.15.2",
     "mysql": "^2.13.0",
+    "node-schedule": "^1.2.4",
     "pg": "^6.2.2",
     "redis": "^2.8.0",
     "socket.io": "^2.0.3"
