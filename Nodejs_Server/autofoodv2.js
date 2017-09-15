@@ -2,9 +2,9 @@ var mysql = require('mysql');
 var schedule = require('node-schedule');
 
 var conn = mysql.createConnection({
-    host: '119.29.201.31',
+    host: 'localhost',
     user: 'root',
-    password: 'klren0312',
+    password: 'root',
     database: 'nodemysql',
     port: 3306
 });
