@@ -3,15 +3,15 @@ var net = require('net')
 var redis = require('redis')
 
 // 配置数据库
-// var conn = mysql.createConnection({
-// 	host:'localhost',
-// 	user:'root',
-// 	password:'root',
-// 	database:'nodemysql',
-// 	port:3306
-// });
+var conn = mysql.createConnection({
+	host:'localhost',
+	user:'root',
+	password:'root',
+	database:'nodemysql',
+	port:3306
+});
 // 连接数据库
-// conn.connect();
+conn.connect();
 
 // 连接Redis
 var redisClient = redis.createClient({
@@ -22,10 +22,16 @@ var redisClient = redis.createClient({
 net.createServer(function(socket){
 	socket.on('data', function(data){
 		console.log('got: ', data.toString());
-		// tem hum indoor feng 
+		// tem hum indoor feng
 		var text = JSON.parse(data.toString());
-		console.log(text.tem)
-
+		var arr = {}
+		arr.tem = text.tem
+		arr.hum = text.hum
+		arr.feng = text.feng
+		arr.indoor = text.indoor
+		conn.query('INSERT INTO pet SET ?', arr, function(error, result, fields) {
+			if (error) throw error;
+		})
 		
 		redisClient.set("tem", text.tem, function(err, reply){
 			console.log("set tem error:" + err);
