@@ -3,10 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>button test</title>
+	<style media="screen">
+		.timeinput{
+			width:44px;
+		}
+	</style>
 </head>
 <body>
 <button onclick="buttonclk1()">开启</button>
 <button onclick="buttonclk0()">关闭</button>
+<label for="">hour</label>
+<input type="number" id="hourinput" class="timeinput">
+<label for="">minute</label>
+<input type="number" id="minuteinput" class="timeinput">
+<label for="">second</label>
+<input type="number" id="secondinput" class="timeinput">
+<button type="button" name="button" onclick="pushTime()">push time</button>
+<span style="color:red" id="hourerr"></span>
+<span style="color:red" id="minuteerr"></span>
+<span style="color:red" id="seconderr"></span>
 <script>
 	function status(response){
 	    if(response.status>=200 && response.status<300){
@@ -19,8 +34,35 @@
 	function json(response){
 	    return response.json();
 	}
+	var hourinput = document.getElementById("hourinput")
+	var minuteinput = document.getElementById("minuteinput")
+	var secondinput = document.getElementById("secondinput")
+	var hourerr = document.getElementById('hourerr')
+	var minuteerr = document.getElementById('minuteerr')
+	var seconderr = document.getElementById('seconderr')
+	function pushTime() {
+			// console.log(hourinput.value+minuteinput.value+secondinput.value)
+			var databody = '{"hour":'+hourinput.value+',"minute":'+minuteinput.value+',"second":'+secondinput.value+'}'
+			fetch("http://127.0.0.1:3000/msgtime",{
+				headers:{
+					'Content-Type':'application/json'
+				},
+				method:"POST",
+				body:databody
+			})
+				.then(status)
+				.then(json)
+				.then(function(data) {
+					console.log(data)
+				})
+				.catch(function(err){
+					console.log("err:"+err)
+				})
+			console.log('{"hour":'+hourinput.value+',"minute":'+minuteinput.value+',"second":'+secondinput.value+'}')
+		}
+
 	function buttonclk1(){
-		fetch("http://127.0.0.1:3000/buttonclick1")
+			fetch("http://127.0.0.1:3000/buttonclick1")
 			.then(status)
 			.then(json)
 			.then(function(data){
@@ -29,7 +71,7 @@
 			.catch(function(err){
 			    console.log("Fetch错误:"+err);
 		});
-	}	
+	}
 	function buttonclk0(){
 		fetch("http://127.0.0.1:3000/buttonclick0")
 			.then(status)
@@ -41,7 +83,9 @@
 			    console.log("Fetch错误:"+err);
 		});
 	}
-	
+
+
+
 </script>
 </body>
 </html>
