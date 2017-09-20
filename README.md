@@ -7,12 +7,17 @@
  - SHT20温湿度
  - BT05蓝牙模块
  - 反射式红外
+ - 麦步手表
+ - S3010舵机
+
 
 使用的Node.js服务端：
 
- - net模块
+ - net
  - express
- - node-mysql
+ - mysql
+ - socket.io
+ - redis
 
 
 文章列表：
@@ -42,5 +47,5 @@
  - [搭建简易的物联网服务端和客户端-移动家庭能力平台【1】（二十三）](http://www.jianshu.com/p/2ad5e9df4db7)
  - [搭建简易的物联网服务端和客户端-移动家庭能力平台【2】（二十四）](http://www.jianshu.com/p/e1dd1a668d5b)
  - [搭建简易的物联网服务端和客户端-redis+websocket（二十五）](http://www.jianshu.com/p/10ac501b36fd)
-
+ - [搭建简易的物联网服务端和客户端-第四次增补（二十六）](http://www.jianshu.com/p/81a859e931d7)
 
