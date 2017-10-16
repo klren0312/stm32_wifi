@@ -26,6 +26,15 @@ app.all('*', function(req, res, next) {
     next();
 })
 
+//post与get测试接口
+app.post("/posttest", function(req, res) {
+    console.log(req.body)
+    res.send('{"result":"ok"}')
+})
+app.get("/gettest", function(req, res) {
+    res.send('{"result":"ok"}')
+})
+
 // 定时通知接口
 app.post('/msgtime', function(req, res) {
     console.log(req.body)
@@ -50,53 +59,53 @@ app.get('/eattimes', function(req, res) {
 //定时接口
 app.post('/times', function(req, res) {
     console.log(req.body.times)
-    if(req.body.times==1||req.body.times==2||req.body.times==3){
-      var post = {}
-      post.type = req.body.times
-      conn.query('INSERT INTO autofood SET ?', post, function(error, result, fields) {
-          if (error) throw error;
-      });
-      res.send("ok");
-    }else{
-      res.send('{"retResult":"error"}')
+    if (req.body.times == 1 || req.body.times == 2 || req.body.times == 3) {
+        var post = {}
+        post.type = req.body.times
+        conn.query('INSERT INTO autofood SET ?', post, function(error, result, fields) {
+            if (error) throw error;
+        });
+        res.send("ok");
+    } else {
+        res.send('{"retResult":"error"}')
     }
 })
 
 //所有数据接口
-app.get('/alldata', function(req,res){
-  conn.query("SELECT * FROM pet ORDER BY id DESC LIMIT 200", function(err, rows, fields){
-    res.send(rows)
-  })
+app.get('/alldata', function(req, res) {
+    conn.query("SELECT * FROM pet ORDER BY id DESC LIMIT 200", function(err, rows, fields) {
+        res.send(rows)
+    })
 })
 
 //导出所有数据为csv
-app.get('/exportAllData', function(req,res){
-  conn.query("SELECT * FROM pet ORDER BY id DESC LIMIT 200", function(err, rows, fields){
-     var fields = ['tem','hum','indoor','feng','time']
-     // 设置 header 使浏览器下载文件
-     res.setHeader('Content-Description', 'File Transfer');
-     res.setHeader('Content-Type', 'application/csv; charset=utf-8');
-     res.setHeader('Content-Disposition', 'attachment; filename=data.csv');
-     res.setHeader('Expires', '0');
-     res.setHeader('Cache-Control', 'must-revalidate');
-     json2csv({
-       data:rows,
-       fields:fields,
-     }, function(err, csv){
-       if (err) {
-         console.log(err)
-       }
-       // 为了让 Windows 能识别 utf-8，加上了 dom
-       res.send('\uFEFF' +csv)
-     })
-  })
+app.get('/exportAllData', function(req, res) {
+    conn.query("SELECT * FROM pet ORDER BY id DESC LIMIT 200", function(err, rows, fields) {
+        var fields = ['tem', 'hum', 'indoor', 'feng', 'time']
+            // 设置 header 使浏览器下载文件
+        res.setHeader('Content-Description', 'File Transfer');
+        res.setHeader('Content-Type', 'application/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=data.csv');
+        res.setHeader('Expires', '0');
+        res.setHeader('Cache-Control', 'must-revalidate');
+        json2csv({
+            data: rows,
+            fields: fields,
+        }, function(err, csv) {
+            if (err) {
+                console.log(err)
+            }
+            // 为了让 Windows 能识别 utf-8，加上了 dom
+            res.send('\uFEFF' + csv)
+        })
+    })
 })
 
 //温度平均值
-app.get('/avgdata', function(req,res){
-  conn.query("SELECT AVG(tem) as temavg, AVG(hum) as humavg FROM pet ORDER BY id DESC LIMIT 200", function(err, rows, fields){
-    res.send('{"temavg":'+rows[0].temavg+',"humavg":'+rows[0].humavg+'}')
-  })
+app.get('/avgdata', function(req, res) {
+    conn.query("SELECT AVG(tem) as temavg, AVG(hum) as humavg FROM pet ORDER BY id DESC LIMIT 200", function(err, rows, fields) {
+        res.send('{"temavg":' + rows[0].temavg + ',"humavg":' + rows[0].humavg + '}')
+    })
 })
 
 //温度
