@@ -1,1 +1,0 @@
-extern uint32 HTTP_PostPkt(u8 *pkt, char *key, char *devid, char *dsid, char *val);
