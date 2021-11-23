@@ -1,0 +1,24 @@
+.select-page {
+    float: right;
+    margin-top: -41px;
+}
+
+.export {
+    float: right;
+    margin-top: -45px;
+    margin-right: 230px;
+}
+
+#historydataCtrl>a {
+    color: #fff;
+}
+
+.thepageChange {
+    cursor: pointer;
+}
+
+#mapcontainer {
+    /*margin-top: -20px;*/
+    /*width: 100%;*/
+    height: 350px;
+}

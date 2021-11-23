@@ -1,0 +1,24 @@
+<main ng-controller="apiTestCtrl" class="apiTestPage row ">
+    <h3 class="header">API测试专用页面</h3>
+    <div style="padding:20px;">
+        <input type="text" ng-model="requestUrl" placeholder="请求URL" class="col-md-12 form-control" id="url-input">
+    </div>
+    <section class="col-md-12 bodyArea">
+        <textarea ng-model="reqbody" class="reqbody col-md-12" cols="30" rows="10"></textarea>
+    </section>
+
+    <div class="btn-group">
+        <button class="btn btn-primary" ng-click="getFun()">GET请求</button>
+        <button class="btn btn-success" ng-click="postFun()">POST请求</button>
+        <button class="btn btn-danger" ng-click="deleteFun()">DELETE请求</button>
+        <button class="btn btn-warning" ng-click="putFun()">PUT请求</button>
+    </div>
+    <section class="col-md-12 bodyArea bodyArea2">
+        <textarea ng-model="resbody" class="reqbody col-md-5" cols="30" rows="10"></textarea>
+        <div class="col-md-2 btnBlock">
+            <button class="btn btn-info" ng-click="prettify()">Prettify JSON ></button>
+        </div>
+        <textarea ng-model="afterPrettify" class="reqbody col-md-5" cols="30" rows="10"></textarea>
+    </section>
+
+</main>

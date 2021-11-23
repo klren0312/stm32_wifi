@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+    		#list{
+				margin-top: -1px;
+			}
+			img{
+				width: 50%;
+				height: 50%;
+				margin-top: 20%;
+			}
+			#image1,#image0{
+				width: 100%;
+				height: 156px;
+			}
+			#fengshan{
+				width: 30%;
+				position: absolute;
+				top: 40%;
+			}
+			#ctrl-button{
+				margin-top: 5%;
+				margin-left:35%;
+			}
+    	</style>
+	</head>
+
+	<body>
+
+		
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+	<ul class="mui-table-view mui-table-view-chevron">
+		<div class="mui-content">
+			<ul id="list" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell" id="device1" >
+					<div class="mui-navigate-right"  >
+						宠物屋环境查看
+					</div>
+				</li>
+				<li class="mui-table-view-cell" id="device2" >
+					<div class="mui-navigate-right"  >
+						宠物用品店
+					</div>
+				</li>
+			</ul>
+		</div>
+		<br />
+			<!--findDoctor-->
+			<button id="findDoctor"  type="button" class="mui-btn mui-btn-danger " style="width: 100%;">
+				呼叫兽医
+			</button>
+			<button id="eatFood"  type="button" class="mui-btn mui-btn-primary " style="width: 100%;">
+				喂食
+			</button>
+			<button class="mui-btn mui-btn-grey" style="width: 100%;">喂食次数：<span id="times"></span></button>
+			<!--<button onclick="btnclk0()" type="button" class="mui-btn mui-btn-success mui-btn-outlined">
+				关闭
+			</button>-->
+		
+		
+		<div id="fengshan">
+			<img class="feng" src="imgs/f1.gif" alt="" id="feng1">
+			<img class="feng" src="imgs/f0.jpg" alt="" id="feng0">
+		</div>
+		
+		<center> 
+			<div>
+				<img src="imgs/1.png" alt="" id="image1">
+				<img src="imgs/0.png" alt="" id="image0">
+			</div>
+			<br />
+			<h1>爱宠之家当前状态</h1>
+		</center>						
+	</ul>
+			</div>
+		</div>
+						
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">	
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					}
+				}
+			});
+
+			/**
+			 * 按钮点击事件
+			 */
+			//喂食
+			document.getElementById("findDoctor").addEventListener('tap',function(){
+				plus.device.dial( '05503011550', false);
+		    });
+		    document.getElementById("eatFood").addEventListener('tap',function(){
+		        mui.getJSON('http://www.zzes1314.cn:3000/buttonclick1',function(data){
+					console.log(data);
+				});
+		    });
+
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					 //请求宠物是否在屋内
+					mui.getJSON('http://www.zzes1314.cn:3000/indoor',function(data){
+							var div = document.getElementById('indoor'); 
+		 					var image1 = document.getElementById('image1');
+		 					var image0 = document.getElementById('image0');
+		
+		 			    	if(data[data.length-1] == 1){
+		 			    		 image0.style.display = "none";
+		 			    		 image1.style.display = "block";  
+		 			    	}else{
+		 			    		 image1.style.display = "none";
+		 			    		 image0.style.display = "block";  
+		 			    	}			
+					});
+					//请求风扇状态
+					mui.getJSON('http://www.zzes1314.cn:3000/feng',function(data){
+							var div = document.getElementById('fengshan'); 
+		 					var feng1 = document.getElementById('feng1');
+		 					var feng0 = document.getElementById('feng0');
+		
+		 			    	if(data[data.length-1] == 0){
+		 			    		 feng0.style.display = "none";
+		 			    		 feng1.style.display = "block";  
+		 			    	}else{
+		 			    		 feng1.style.display = "none";
+		 			    		 feng0.style.display = "block";  
+		 			    	}			
+					});
+					mui.getJSON('http://www.zzes1314.cn:3000/eattimes',function(data){
+						console.log(data.eattimes);
+						document.getElementById("times").innerHTML = data.eattimes
+						
+					});
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+  
+	 			
+ 
+ 
+ 
+ 			document.getElementById('device1').addEventListener('tap', function() {
+  				mui.openWindow({
+  					url:'pages/device1.html',
+  					id:'pages/device1.html',
+  					show:{
+  						aniShow:"pop-in"
+  					}
+  				})
+			});
+			document.getElementById('device2').addEventListener('tap', function() {
+				mui.openWindow({
+					url:'http://shop.m.taobao.com/shop/shop_cat.htm?gotoSearch=1&expandSecCat=1&user_id=1787781704&shop_id=106505692&spm=a2141.7c.0.gotoShopCategory',
+					id:'petshop',
+					show:{
+						aniShow:"pop-in"
+					}
+				})
+			});
+			
+	 		//更新宠物数据
+			 
+		</script>
+	</body>
+
+</html>

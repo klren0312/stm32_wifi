@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>api测试通道</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<style>
+			.chart {
+				height: 200px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			
+			h5:first-child {
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">API测试通道</h1>
+		</header>
+		 
+		<div class="mui-content"> 
+			<button id="sendMsg"   type="button" class="mui-btn mui-btn-primary " style="width: 100%;margin-top: 20px;">
+							短信通知
+						</button>
+			<button id="outdoorvoice"  type="button" class="mui-btn mui-btn-primary " style="width: 100%;margin-top: 20px;">
+							离屋语音
+						</button>
+			<button id="temvoice"  type="button" class="mui-btn mui-btn-primary " style="width: 100%;margin-top: 20px;">
+							温度超阈值语音
+						</button>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../libs/echarts.js"></script>
+		<script>
+			mui.init()
+			document.getElementById("sendMsg").addEventListener('tap',function(){
+		        mui.getJSON('http://119.29.201.31:3250/sendMsg', function(data) {
+					console.log(data);
+				});
+		    });
+		    document.getElementById("outdoorvoice").addEventListener('tap',function(){
+		        mui.getJSON('http://119.29.201.31:3250/indoorVoice', function(data) {
+					console.log(data);
+				});
+		    });
+ 			document.getElementById("temvoice").addEventListener('tap',function(){
+		        mui.getJSON('http://119.29.201.31:3250/temVoice', function(data) {
+					console.log(data);
+				});
+		    });
+
+		</script>
+	</body>
+
+</html>

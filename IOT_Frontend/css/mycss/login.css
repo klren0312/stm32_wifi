@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.fl {
+    float: left;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.page-header {
+    background-color: #FFD43D;
+    width: 100%;
+    height: 360px;
+}
+
+.page-header .logo {
+    width: 155px;
+    height: 62px;
+    position: absolute;
+    top: 76px;
+    left: 50%;
+    margin-left: -350px;
+}
+
+.content {
+    width: 552px;
+    margin: -205px auto 60px;
+    padding: 62px 70px 68px 78px;
+    background: #fff;
+    display: table;
+    border: 1px solid #d4d4d4;
+    border-radius: 30px 30px;
+}
+
+.content .left_content {
+    width: 290px;
+}
+
+.content .tab_active {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    z-index: 1;
+    background-color: #00b38a;
+    width: 150px;
+    height: 1px;
+}
+
+li {
+    list-style: none;
+}
+
+.form_head li.active {
+    color: #00b38a;
+}
+
+.form_head li {
+    font-size: 16px;
+    line-height: 24px;
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 33px;
+    cursor: pointer;
+    text-align: left;
+    color: #333;
+}
+
+.input_box {
+    font-size: 14px;
+    width: 290px;
+    height: 44px;
+    box-sizing: border-box;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #ededed;
+    border-radius: 0;
+    border-color: #ededed;
+}
+
+.forget_pwd {
+    color: #00b38a;
+}
+
+a {
+    text-decoration: none;
+}
+
+.green-btn {
+    background-color: #C1272D;
+    width: 290px;
+    height: 46px;
+    font-size: 18px;
+    line-height: 46px;
+    color: white;
+    border: 0;
+}
+
+/* #phoneInput {
+    width: 213px;
+} */
+
+#authCodeBtn {
+    height: 40px;
+    background-color: #C1272D;
+    border: 0;
+    width: 73px;
+    color: white;
+}
+
+#qrcode {
+    width: 180px;
+    margin-left: 68px;
+    border: 1px solid #C1272D;
+}
+
+#register {
+    transition: display 2s;
+}

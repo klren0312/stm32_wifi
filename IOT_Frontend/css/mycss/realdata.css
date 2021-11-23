@@ -1,0 +1,32 @@
+.real-data-charts {
+    height: 350px;
+    width: 100%;
+}
+
+.indoorimg {
+    /*margin-bottom: 200px;*/
+    margin-top: 40px;
+}
+
+.indoorimg img,
+.indoorimg h4 {
+    width: 67%;
+    display: none;
+}
+
+.indoorimg h4 {
+    float: right;
+}
+
+.indoorimg .doorimg {
+    margin-left: 75px;
+}
+
+.feng .fengimg {
+    width: 26%;
+    margin-left: 250px;
+}
+
+.indoorimg .imgactive {
+    display: block;
+}

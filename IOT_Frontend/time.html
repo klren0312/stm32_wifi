@@ -1,0 +1,45 @@
+<main ng-controller="timeCtrl" id="timeCtrl">
+    <div class="col-md-4 card">
+        <header>
+            <h3>喂食控制</h3>
+        </header>
+        <section class="col-md-12">
+            <img src="img/giveFood.gif" alt="givefood">
+            <button type="button" ng-click="givefood()" class="btn btn-large btn-block btn-warning">
+                点击喂食
+            </button>
+        </section>
+    </div>
+    <div class="col-md-4 card">
+        <header>
+            <h3>定时喂食</h3>
+        </header>
+        <section class="col-md-12">
+            <img src="img/time.gif" alt="time2food">
+            <div class="col-md-12">
+                <input class="col-md-4" ng-model="foodhour" type="number" placeholder="小时">
+                <input class="col-md-4" ng-model="foodminute" type="number" placeholder="分钟">
+                <input class="col-md-4" ng-model="foodsecond" type="number" placeholder="秒">
+            </div>
+            <button type="button" class="btn btn-large btn-block btn-info" ng-click="time2feed()">
+                提交
+            </button>
+        </section>
+    </div>
+    <div class="col-md-4 card">
+        <header>
+            <h3>定时通知</h3>
+        </header>
+        <section class="col-md-12">
+            <img src="img/msg.gif" alt="msg">
+            <div class="col-md-12">
+                <input class="col-md-4" ng-model="hour" type="number" placeholder="小时">
+                <input class="col-md-4" ng-model="minute" type="number" placeholder="分钟">
+                <input class="col-md-4" ng-model="second" type="number" placeholder="秒">
+            </div>
+            <button type="button" class="btn btn-large btn-block btn-info" ng-click="time2msg()">
+                提交
+            </button>
+        </section>
+    </div>
+</main>

@@ -1,0 +1,16 @@
+a {
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#nav-bottom {
+    margin-bottom: 0;
+}
+
+table th,
+table td {
+    text-align: center;
+}

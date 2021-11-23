@@ -1,0 +1,30 @@
+#timeCtrl {
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #d4d4d4;
+    border-radius: 10px 10px;
+    height: 500px;
+}
+
+.card header {
+    text-align: center;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.card section img {
+    width: 100%;
+    height: 200px;
+    height: 324px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card #time {
+    text-align: center;
+}
+
+.card button {
+    margin-top: 36px;
+}

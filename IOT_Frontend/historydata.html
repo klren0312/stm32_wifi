@@ -1,0 +1,66 @@
+<main ng-controller="historydataCtrl" style="padding:20px;">
+    <section id="historydataCtrl">
+        <h3>历史数据查看</h3>
+        <a class="btn btn-info export" href="http://119.29.201.31:3000/exportAllData">导出CSV</a>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>温度</th>
+                    <th>湿度</th>
+                    <th>宠物是否再屋内</th>
+                    <th>风扇状态</th>
+                    <th>时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in items">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.tem}}</td>
+                    <td>{{x.hum}}</td>
+                    <td>{{x.indoor|indoorFilter}}</td>
+                    <td>{{x.feng|fengFilter}}</td>
+                    <td>{{x.time|timeFilter}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!--分页-->
+        <nav class="select-page">
+            <ul class="pagination">
+                <li>
+                    <a class="thepageChange" ng-click="Previous()"><span>上一页</span></a>
+                </li>
+                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}">
+                    <a class="thepageChange" ng-click="selectPage(page)">{{page}}</a>
+                </li>
+                <li>
+                    <a class="thepageChange" ng-click="Next()"><span>下一页</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <table class="table table-bordered tabble-hover">
+            <thead>
+                <tr>
+                    <th>温度平均值</th>
+                    <th>湿度平均值</th>
+                    <th>总喂食次数</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>{{temavg}}</td>
+                <td>{{humavg}}</td>
+                <td>{{eattimes}}</td>
+            </tr>
+        </table>
+
+        <h3>设备注册地址</h3>
+        <section>
+            <div id="mapcontainer" class="col-md-6"></div>
+            <div class="col-md-6">
+                <indoor-analysis ng-if="data" data="data" id="indoor-analysis"></indoor-analysis>
+            </div>
+        </section>
+    </section>
+
+</main>

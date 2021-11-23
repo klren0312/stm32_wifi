@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="baidu-site-verification" content="T9S3RMUIgE" />
+    <meta name="keyword" content="治电科技物联网平台,ZZES, 治电科技,物联网平台,,软件云平台">
+    <meta name="description" content="治电科技物联网平台，由治电核心团队亲手打造的物联网创新连接平台">
+    <title>治电科技物联网平台</title>
+    <!--css-->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!--my css-->
+    <link rel="stylesheet" href="css/mycss/index.css" />
+    <link rel="stylesheet" href="css/mycss/home.css" />
+    <link rel="stylesheet" href="css/mycss/realdata.css">
+    <link rel="stylesheet" href="css/mycss/historydata.css">
+    <link rel="stylesheet" href="css/mycss/time.css">
+    <link rel="stylesheet" href="css/mycss/apiTest.css">
+    <!--javascript-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+
+    <!--my angularjs-->
+    <script src="js/myjs/indexApp.js"></script>
+    <script src="js/myjs/indexCtrl.js"></script>
+
+
+</head>
+
+<body ng-app="indexApp" ng-controller="indexCtrl">
+    <nav id="nav-bottom" class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">治电物联网平台</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="index">首页</a></li>
+                    <li><a ui-sref="real">实时数据</a></li>
+                    <li><a ui-sref="history">历史数据</a></li>
+                    <li><a ui-sref="time">控制与定时</a></li>
+                    <li><a ui-sref="apiTest">API专用测试</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://zb.zzes1314.cn/no1.html">直播平台</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!--ui-view-->
+    <ui-view></ui-view>
+
+    <footer class="col-md-12" style="text-align:center;">
+        <hr>
+        <span class="col-md-12">&copy;2009~2017 治电科技-治电物联网</span>
+        <span class="col-md-12"><a href="http://www.zzes1314.cn">Zhizhong Electric Science</a></span>
+    </footer>
+    <!--javascript-->
+
+    <script src="js/angular-ui-router.min.js" defer></script>
+    <script src="js/echarts.min.js" defer></script>
+    <script src="js/socket.io.js" defer></script>
+    <!--my angularjs-->
+
+    <script src="js/myjs/indexRouter.js"></script>
+    <script src="js/myjs/indexFilter.js"></script>
+    <!--otherpage angularjs-->
+    <script src="js/otherpage/homeCtrl.js"></script>
+    <script src="js/otherpage/realdataCtrl.js" defer></script>
+    <script src="js/otherpage/historydataCtrl.js" defer></script>
+    <script src="js/otherpage/timeCtrl.js" defer></script>
+    <script src="js/otherpage/apiTestCtrl.js" defer></script>
+    <script src="js/otherpage/realtem-data.js" defer></script>
+    <script src="js/otherpage/realhum-data.js" defer></script>
+    <script src="js/otherpage/indoor-analysis.js" defer></script>
+    <!-- <script src="js/otherpage/controller.js" defer></script> -->
+    <!--高德地图-->
+    <script src="http://webapi.amap.com/maps?v=1.3&key=0d3f2bb50a6ee986961d555b2469db15"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js" defer="defer"></script>
+</body>
+
+</html>

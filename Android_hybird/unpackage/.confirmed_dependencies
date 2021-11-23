@@ -1,0 +1,73 @@
+{
+  "pages/device1.html": {
+    "href": "pages/device1.html",
+    "resources": [
+      "css/mui.min.css",
+      "css/app.css",
+      "js/mui.min.js",
+      "libs/echarts.js",
+      "fonts/mui.ttf",
+      "pages/device1_son.html"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "list.html": {
+    "href": "list.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "imgs/zvd.png",
+      "fonts/mui.ttf",
+      "imgs/f0.jpg",
+      "imgs/1.png",
+      "imgs/f1.gif",
+      "imgs/0.png"
+    ],
+    "refer": [
+      "pages/device1.html",
+      "pages/device2.html"
+    ],
+    "priority": 0
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "css/mui.min.css",
+      "js/mui.min.js",
+      "imgs/zvd.png",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "list.html",
+      "pages/device1.html"
+    ],
+    "priority": 0
+  },
+  "pages/device2.html": {
+    "resources": [
+      "css/app.css",
+      "css/mui.min.css",
+      "libs/echarts.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "pages/device1_son.html": {
+    "resources": [
+      "libs/echarts.js"
+    ],
+    "refer": []
+  },
+  "login.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "imgs/zvd.png"
+    ],
+    "refer": [
+      "index.html"
+    ]
+  }
+}
